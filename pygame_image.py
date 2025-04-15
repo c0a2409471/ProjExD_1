@@ -22,18 +22,16 @@ def main():
                 return
         x=tmr%3200
         key_lst = pg.key.get_pressed()
+        dx,dy=-1,0
         if key_lst[pg.K_UP]:
-            images_rct.move_ip((0, -1))
+            dy-=1
         if key_lst[pg.K_RIGHT]:
-            images_rct.move_ip((2, 0))
+            dx+=2
         if key_lst[pg.K_LEFT]:
-            images_rct.move_ip((-1, 0))
+            dx-=1
         if key_lst[pg.K_DOWN]:
-            images_rct.move_ip((0, 1))
-        if False in key_lst:
-            images_rct.move_ip((-1,0))
-
-
+            dy+=1
+        images_rct.move_ip((dx, dy))
         screen.blit(bg_img, [-x, 0])
         screen.blit(gb_image, [-x+1600, 0])
         screen.blit(bg_img, [-x+3200, 0])
