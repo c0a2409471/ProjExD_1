@@ -14,15 +14,28 @@ def main():
     tmr = 0
     images=pg.image.load("fig/3.png")
     images=pg.transform.flip(images,True,False)
+    images_rct=images.get_rect()
+    images_rct.center= (300,200)
     while True:
         for event in pg.event.get():
-            if event.type == pg.QUIT: return
+            if event.type == pg.QUIT: 
+                return
+        key_lst = pg.key.get_pressed()
+        if key_lst[pg.K_UP]:
+            images_rct.move_ip((0, -1))
+        if key_lst[pg.K_RIGHT]:
+            images_rct.move_ip((1, 0))
+        if key_lst[pg.K_LEFT]:
+            images_rct.move_ip((-1, 0))
+        if key_lst[pg.K_DOWN]:
+            images_rct.move_ip((0, 1))
+
+
         x=tmr%3200
         screen.blit(bg_img, [-x, 0])
         screen.blit(gb_image, [-x+1600, 0])
         screen.blit(bg_img, [-x+3200, 0])
-        screen.blit(images,[300,200])
-
+        screen.blit(images,images_rct)
         pg.display.update()
         tmr += 1 
         clock.tick(200)
